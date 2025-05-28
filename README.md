@@ -24,7 +24,7 @@ Este projeto foi criado com o objetivo de praticar conceitos fundamentais de **J
 
 > O layout foi pensado de forma simples, com um visual moderno e limpo, ideal para o uso diário.
 
-![Preview do projeto]("./assets/preview.png")
+![Preview do projeto]("/assets/preview.png")
 
 ---
 
