@@ -40,7 +40,7 @@ Este projeto foi criado com o objetivo de praticar conceitos fundamentais de **J
 
 1. Clone o repositório:
    ```bash
-   git clone https://github.com/SeuUsuario/seu-repo.git
+   git clone https://github.com/FerVini/todo-list
    ```
 2. Abra o arquivo `index.html` no navegador.
 
