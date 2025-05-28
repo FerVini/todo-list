@@ -1,0 +1,198 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --fonte-primaria: "Rubik", sans-serif;
+    --fonte-textos: "Inter", sans-serif;
+    --cor-body: #2583D0;
+    --cor-aplicacao: #DADFF7;
+    --cor-detalhes: #0A263C;
+    --cor-sombra: #0a263c76;
+    --cor-completar: #0AFF6C;
+    --cor-cancelar: #E85A5F;
+}
+
+body {
+    min-height: 100vh;
+    padding: 20px 0;
+    height: 100%;
+    background-color: var(--cor-body);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+main {
+    width: 650px;
+    height: 100%;
+    background-color: var(--cor-aplicacao);
+    border-radius: 10px;
+    padding: 50px 75px 0px;
+}
+
+h1 {
+    color: var(--cor-detalhes);
+    font-family: var(--fonte-primaria);
+    font-weight: 700;
+    font-size: 32px;
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 25px;
+    padding-bottom: 50px;
+    border-bottom: 2px solid var(--cor-detalhes);
+
+    textarea {
+        width: 90%;
+        height: 100px;
+        border-radius: 10px;
+        padding: 10px 20px;
+        font-family: var(--fonte-textos);
+        font-size: 14px;
+        color: var(--cor-detalhes);
+        background: var(--cor-aplicacao);
+        border: 2px solid var(--cor-detalhes);
+        resize: none;
+        box-shadow: 0 0 10px var(--cor-sombra);
+        transition: all 0.2s ease-in ;
+    }
+
+    textarea::placeholder {
+        font-family: var(--fonte-textos);
+        font-size: 14px;
+        font-style: italic;
+    }
+    
+    textarea:focus {
+        border: 3px solid var(--cor-detalhes);
+        outline: none;
+    }
+
+    button {
+        width: 40%;
+        padding: 10px;
+        border-radius: 20px;
+        border: none;
+        background-color: #0A263C;
+        color: #fff;
+        font-size: 16px;
+        font-weight: 600;
+        font-family: var(--fonte-primaria);
+        box-shadow:  0 0 15px var(--cor-sombra);
+        cursor: pointer;
+    }
+}
+
+#secao-tarefas {
+    padding: 50px 5%;
+
+    #lista-tarefas {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 20px;
+        
+        .item-tarefa {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            min-height: 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: stretch;
+            border-radius: 5px;
+            border: 2px solid var(--cor-detalhes);
+            box-shadow: 0 0 10px var(--cor-sombra);
+            cursor: pointer;
+            
+            &::before {
+                content: "";
+                border-top-left-radius: 5px;
+                border-bottom-left-radius: 5px;
+                position: absolute;
+                top: 0px;
+                left: 0px;
+                width: 0%;
+                height: 100%;
+                background-color: var(--cor-completar);
+                transition: all 0.3s ease-in-out;
+                pointer-events: none;
+            }
+            
+            &:hover::before {
+                width: calc(100% - 46px);
+            }
+            
+            &::after {
+                content: "COMPLETAR!";
+                color: var(--cor-detalhes);
+                font-family: var(--fonte-textos);
+                font-weight: 600;
+                position: absolute;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                top: 0px;
+                left: 0px;
+                width: calc(100% - 46px);
+                height: 100%;
+                opacity: 0;
+            }
+
+            &:hover::after {
+                opacity: 1;
+                transition-delay: 0.2s;
+            }
+
+            .id-tarefa {
+                display: flex;
+                align-items: center;
+                padding: 0px 10px;
+                border-right: 2px solid var(--cor-detalhes);
+                font-family: var(--fonte-textos);
+                font-size: 16px;
+                font-weight: 700;
+                color: var(--cor-detalhes);
+            }
+
+            .conteudo-tarefa {
+                display: flex;
+                align-items: center;
+                text-align: justify;
+                padding: 5px 15px;
+                width: 100%;
+                font-family: var(--fonte-textos);
+                color: var(--cor-detalhes);
+            }
+
+            .cancelar-tarefa {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                background: var(--cor-cancelar);
+                border-top-right-radius: 2.5px;
+                border-bottom-right-radius: 2.5px;
+                border: none;
+                border-left: 2px solid var(--cor-detalhes);
+                padding: 0 15px;
+                cursor: pointer;
+
+                .icone {
+                    font-size: 16px;
+                    color: var(--cor-detalhes);
+                }
+            }
+        }
+    }
+}
