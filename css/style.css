@@ -15,6 +15,36 @@
     --cor-cancelar: #E85A5F;
 }
 
+@keyframes fadeInTask {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.task-item {
+    animation: fadeInTask 0.5s ease forwards;
+}
+
+@keyframes fadeOutTask {
+  from {
+    opacity: 1;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+}
+
+.task-exit {
+  animation: fadeOutTask 0.4s ease forwards;
+}
+
 body {
     min-height: 100vh;
     padding: 20px 0;
@@ -58,6 +88,7 @@ form {
         padding: 10px 20px;
         font-family: var(--fonte-textos);
         font-size: 14px;
+        text-transform: capitalize;
         color: var(--cor-detalhes);
         background: var(--cor-aplicacao);
         border: 2px solid var(--cor-detalhes);
@@ -74,6 +105,7 @@ form {
     
     textarea:focus {
         border: 3px solid var(--cor-detalhes);
+        box-shadow: 0 0 10px var(--cor-completar);
         outline: none;
     }
 
@@ -88,12 +120,26 @@ form {
         font-weight: 600;
         font-family: var(--fonte-primaria);
         box-shadow:  0 0 15px var(--cor-sombra);
+        border: 2px solid var(--cor-detalhes);
         cursor: pointer;
+        transition: all 0.2s ease-in-out;
+
+        &:hover {
+            background-color: var(--cor-completar);
+            color: var(--cor-detalhes);
+            box-shadow: 0 0 15px var(--cor-completar);
+        }
     }
 }
 
 #secao-tarefas {
     padding: 50px 5%;
+
+    .mensagem-automatica {
+        color: var(--cor-detalhes);
+        font-family: var(--fonte-textos);
+        font-style: italic;
+    }
 
     #lista-tarefas {
         width: 100%;
@@ -138,7 +184,7 @@ form {
                 content: "COMPLETAR!";
                 color: var(--cor-detalhes);
                 font-family: var(--fonte-textos);
-                font-weight: 600;
+                font-weight: 700;
                 position: absolute;
                 display: flex;
                 align-items: center;
@@ -158,6 +204,8 @@ form {
             .id-tarefa {
                 display: flex;
                 align-items: center;
+                justify-content: center;
+                min-width: 40px;
                 padding: 0px 10px;
                 border-right: 2px solid var(--cor-detalhes);
                 font-family: var(--fonte-textos);
