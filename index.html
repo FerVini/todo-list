@@ -21,7 +21,7 @@
             <h1>Minha To-Do List</h1>
 
             <form>
-                <textarea name="input-tarefa" id="input-tarefa" placeholder="Digite uma tarefa..."></textarea>
+                <textarea id="input-tarefa" placeholder="Digite uma tarefa..."></textarea>
 
                 <button id="btn-adicionar-tarefa">Adicionar</button>
             </form>
@@ -29,7 +29,11 @@
 
         <section id="secao-tarefas">
             <ul id="lista-tarefas">
-                <p class="mensagem-automatica">Crie uma nova tarefa...</p>
+                <li class="item-tarefa">
+                    <p class="incompleta">Completar!</p>
+                    <p class="conteudo-tarefa"><strong class="id-tarefa">01</strong>Comprar Pão!</p>
+                    <button class="cancelar-tarefa"><i class="icone fa-solid fa-trash"></i></button>
+                </li>
             </ul>
         </section>
     </main>
