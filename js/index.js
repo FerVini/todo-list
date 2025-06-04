@@ -1,47 +1,76 @@
-const textarea = document.querySelector("#input-tarefa");
-const btnAdicionarTarefa =  document.querySelector("#btn-adicionar-tarefa");
-const listTarefas = document.querySelector("#lista-tarefas");
-const arrayTarefas = [];
+const inputTask = document.querySelector("#input-tarefa");
+const btnAddTask = document.querySelector("#btn-adicionar-tarefa");
+const tasksList = document.querySelector("#lista-tarefas");
+const tasksArray = [];
 let id = 1;
 
-const cancelarTarefa = (botao, id) => {
-    const li =botao.closest(".task-item");
-    li.classList.add("task-exit");
+function completeTask(elemento, index) {
+    const li = elemento.closest(".item-tarefa");
+    li.classList.add("bounce");
+    tasksArray[index].complete = true;
 
-    const index = arrayTarefas.findIndex(t => t.id === id);
     if (index !== -1) {
         setTimeout(() => {
-            arrayTarefas.splice(index, 1);
-            renderList(arrayTarefas);
-        },400)
+            li.classList.remove("bounce")
+            renderList();
+        }, 600)
+    } else {
+        renderList();
+    }
+
+}
+
+function cancelTask(elemento, index) {
+    const li =elemento.closest(".item-tarefa");
+    li.classList.add("task-exit");
+
+    if (index !== -1) {
+        setTimeout(() => {
+            tasksArray.splice(index, 1);
+            renderList();
+        }, 400)
     }
 }
 
-const renderList = (tarefas) => {
-    listTarefas.innerHTML = tarefas.map(tarefa =>`
+function renderList() {
+    if(tasksArray.length) {
+        tasksList.innerHTML = tasksArray.map((task, index) => `
         <li class="item-tarefa task-item">
-            <p class="id-tarefa">${String(tarefa.id).padStart(2, "0")}</p>
-            <p class="conteudo-tarefa">${tarefa.tarefa}</p>
-            <button class="cancelar-tarefa" onClick="cancelarTarefa(this, ${tarefa.id})"><i class="icone fa-solid fa-trash"></i></button>
-        </li>`).join("");
-}
-
-const addToDo = (tarefa) => {
-    if(tarefa.length === 0) {
-        alert("Adicione uma tarefa!");
-        return;
+            ${task.complete ? "" : `<p class="incompleta" onClick="completeTask(this, ${index})">Completar!</p>` }
+            <p class="conteudo-tarefa">
+                <strong class="id-tarefa">
+                    ${task.complete ? '<i class="fa-solid fa-circle-check"></i>' : String(task.id).padStart(2, "0")}
+                </strong>
+                ${task.task}
+            </p>
+            <button class="cancelar-tarefa" onClick="cancelTask(this, ${index})"><i class="icone fa-solid fa-trash"></i></button>
+        </li>
+        `).join("");
+    } else {
+        tasksList.innerHTML = "<p class='mensagem-automatica'>Adicione uma tarefa...</p>"
     }
-    textarea.value = "";
-
-    tarefa = tarefa.charAt(0).toUpperCase() + tarefa.slice(1).toLowerCase();
-    arrayTarefas.unshift({id: id, tarefa: tarefa});
-    id++;
-
-    renderList(arrayTarefas);
 }
 
-btnAdicionarTarefa.addEventListener("click", (event) => {
-    event.preventDefault();
+function addTask() {
+    tasksArray.unshift({
+        id: id,
+        task: inputTask.value.trim(),
+        complete: false
+    });
 
-    addToDo(textarea.value);
-})
+    inputTask.value = "";
+    renderList();
+    id++;
+}
+
+btnAddTask.addEventListener('click', (e) => {
+    e.preventDefault();
+
+    if (inputTask.value.trim()) {
+        addTask();
+    } else {
+        alert("Você precisa adicionar uma tarefa primeiro!");
+    }
+});
+
+renderList();

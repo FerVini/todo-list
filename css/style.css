@@ -243,4 +243,5 @@ form button:hover {
 #lista-tarefas .item-tarefa:hover .incompleta {
   opacity: 1;
   width: calc(100% - 46px);
+  pointer-events: all;
 }
